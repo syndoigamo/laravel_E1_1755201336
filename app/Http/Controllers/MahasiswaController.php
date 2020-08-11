@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mahasiswa;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class MahasiswaController extends Controller
 {
@@ -24,6 +26,12 @@ class MahasiswaController extends Controller
     public function create()
     {
         //
+    }
+
+    public function mhs_list() {
+        return DataTables::of(Mahasiswa::all())
+        ->addIndexColumn()
+                ->toJson();
     }
 
     /**
