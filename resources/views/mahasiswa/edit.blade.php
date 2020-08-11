@@ -38,14 +38,12 @@
             <option value="{{ $item->kode_prodi }}" {{ ($mhs->prodi==$item->kode_prodi) ? 'selected' : '' }} >{{ $item->nama_prodi }}</option>
           @endforeach
         </select>
-        <small id="nama" class="form-text text-muted"></small>
       </div>
     </div>
     <div class="form-group row">
       <label for="nim" class="col-sm-12">Alamat</label>
       <div class="col-sm-8">
         <textarea name="alamat" class="form-control" id="alamat">{{ $mhs->alamat }}</textarea>
-        <small id="nama" class="form-text text-muted"></small>
       </div>
     </div>
   <button class="btn btn-primary" type="submit">Simpan</button>

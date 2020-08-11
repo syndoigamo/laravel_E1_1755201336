@@ -26,7 +26,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        return view('prodi.create');
     }
 
     /**
@@ -37,7 +37,14 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode_prodi' => 'required|unique:prodi',
+            'nama_prodi' => 'required',
+            'kaprodi' => 'required',
+        ]);
+
+        Prodi::create($request->all());
+        return redirect()->route('prodi.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -48,7 +55,8 @@ class ProdiController extends Controller
      */
     public function show($id)
     {
-        //
+        $prodi = Prodi::where('kode_prodi', $id)->first();
+        return view('prodi.edit', compact('prodi'));
     }
 
     /**
@@ -57,9 +65,9 @@ class ProdiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Prodi $prodi)
     {
-        //
+        return view('prodi.edit', compact('prodi'));
     }
 
     /**
@@ -71,7 +79,17 @@ class ProdiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_prodi' => 'required',
+            'kaprodi' => 'required',
+        ]);
+
+        Prodi::where('kode_prodi', $id)
+            ->update([
+                'nama_prodi' => $request->nama_prodi,
+                'kaprodi' => $request->kaprodi,
+            ]);
+        return redirect()->route('prodi.index')->with('success', 'Data Berhasil Diedit');
     }
 
     /**
@@ -82,6 +100,7 @@ class ProdiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Prodi::where('kode_prodi', $id)->delete();
+        return redirect()->route('prodi.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

@@ -28,3 +28,5 @@ Route::put('/mhs/update/{mahasiswa:nim}', 'MahasiswaController@update')->name('m
 Route::get('/mhs/delete/{mahasiswa:nim}', 'MahasiswaController@destroy')->name('mhs.delete');
 //Prodi (Route Framework)
 Route::resource('/prodi', 'ProdiController');
+
+Route::resource('/matkul', 'MatkulController'); 
